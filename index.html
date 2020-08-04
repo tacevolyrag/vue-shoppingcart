@@ -60,9 +60,9 @@
                                 原價 ${{ product.origin_price }} 元
                             </div>
                             <div v-else class="product-price">
-                                <div class="h6 product-origin">原價 ${{ product.origin_price }} 元</div>
+                                <div class="h6 product-origin">原價 ${{ product.origin_price | thousand}} 元</div>
                             </div>
-                            <div class="h5 product-off">特價 ${{ product.price }} 元</div>
+                            <div class="h5 product-off">特價 ${{ product.price | thousand}} 元</div>
                         </div>
                         <div class="card-footer d-flex mt-3">
                             <button type="button" class="btn product-detail"
@@ -119,13 +119,13 @@
                                 </div>
                             </td>
                             <td class="align-middle">{{ item.product.unit }}</td>
-                            <td class="align-middle text-right">${{ item.product.price * item.quantity}} 元</td>
+                            <td class="align-middle text-right">${{ item.product.price * item.quantity | thousand}} 元</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr v-if="cart.length">
                             <td colspan="4" class="text-right total-price">總計</td>
-                            <td colspan="5" class="text-right total-price">${{ cartTotal }} 元
+                            <td colspan="5" class="text-right total-price">${{ cartTotal | thousand }} 元
                             </td>
                         </tr>
                     </tfoot>

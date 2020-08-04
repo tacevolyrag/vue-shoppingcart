@@ -4,14 +4,19 @@ Vue.component('ValidationProvider', VeeValidate.ValidationProvider);
 Vue.component('ValidationObserver', VeeValidate.ValidationObserver);
 // loading
 Vue.component('loading', VueLoading);
-
+// 千分位
+Vue.filter('thousand', num => {
+    let parts = num.toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
+});
 // Class 設定檔案
 VeeValidate.configure({
     classes: {
-      valid: 'is-valid',
-      invalid: 'is-invalid',
+        valid: 'is-valid',
+        invalid: 'is-invalid',
     }
-  });
+});
 // 匯入語系檔案
 import zh_TW from './zh_TW.js';
 console.log(VueLoading);
@@ -26,7 +31,7 @@ new Vue({
         cart: {},
         cartTotal: 0,
         isLoading: false,
-        form:{
+        form: {
             email: '',
             tel: '',
             address: '',
@@ -45,15 +50,15 @@ new Vue({
             const apiUrl = `${this.api.path}api/${this.api.uuid}/ec/products`;
             this.isLoading = true;
             axios.get(apiUrl)
-            .then(res => {
-                this.products = (res.data.data);
-                this.isLoading = false;
-            }).catch(err => {
-                console.log(err)
-            });
+                .then(res => {
+                    this.products = (res.data.data);
+                    this.isLoading = false;
+                }).catch(err => {
+                    console.log(err)
+                });
         },
         // 查看更多商品細節
-        getProductDetail(id){
+        getProductDetail(id) {
             // GET api/{uuid}/ec/product/{id} 取得單一產品
             const productUrl = `${this.api.path}api/${this.api.uuid}/ec/product/${id}`
             this.isLoading = true;
@@ -65,15 +70,15 @@ new Vue({
                     this.isLoading = false;
                 }).catch(err => {
                     console.log(err);
-                });            
+                });
         },
         // 取得購物車列表資訊
-        getCart(){
+        getCart() {
             // api/{uuid}/ec/shopping
             const cartUrl = `${this.api.path}api/${this.api.uuid}/ec/shopping`;
             this.isLoading = true;
             axios.get(cartUrl)
-                .then(res =>{
+                .then(res => {
                     this.cart = res.data.data;
                     this.updateTotalPrice();
                     this.isLoading = false;
@@ -82,7 +87,7 @@ new Vue({
                 })
         },
         // 增加產品到購物車
-        addToCart(item,quantity) {
+        addToCart(item, quantity) {
             // api/{uuid}/ec/shopping
             const addCartUrl = `${this.api.path}api/${this.api.uuid}/ec/shopping`;
             this.isLoading = true;
@@ -90,7 +95,7 @@ new Vue({
                 product: item.id,
                 quantity: 1
             };
-            axios.post(addCartUrl,cart)
+            axios.post(addCartUrl, cart)
                 .then(res => {
                     console.log(cart.product);
                     $('#detailModal').modal('hide');
@@ -105,10 +110,10 @@ new Vue({
             // api/{uuid}/ec/shopping/{id}
             const removeUrl = `${this.api.path}api/${this.api.uuid}/ec/shopping/${id}`
             this.isLoading = true;
-            axios.delete(removeUrl,id)
-                .then( () => {
-                    this.cart.forEach( item => {
-                        this.cart.splice(id,1);
+            axios.delete(removeUrl, id)
+                .then(() => {
+                    this.cart.forEach(item => {
+                        this.cart.splice(id, 1);
                         this.getCart();
                     });
                 });
@@ -128,6 +133,7 @@ new Vue({
         updateTotalPrice() {
             this.cartTotal = 0;
             this.cart.forEach(item => {
+                this.toCurrency(this.cartTotal);
                 this.cartTotal += item.quantity * item.product.price;
             });
         },
@@ -146,12 +152,13 @@ new Vue({
                     console.log(err);
                 })
         },
-        submitData(){
+
+        submitData() {
             alert('送出成功');
         },
     },
     created() {
         this.getProducts();
-        this.getCart();       
+        this.getCart();
     },
 });
