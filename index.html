@@ -214,10 +214,10 @@
                             <p class="h4 text-center py-3">{{ detailProduct.content }}</p>
                             <span class="h5">{{ detailProduct.description }}</span>
                         </blockquote>
-                        <div class="d-flex justify-content-around mt-5">
-                            <div class="h5" v-if="detailProduct.price"><del>原價 ${{ detailProduct.origin_price | thousand}} 元</del>
+                        <div class="d-flex justify-content-around mt-5 product-price">
+                            <div class="h5 product-origin" v-if="detailProduct.price"><del>原價 ${{ detailProduct.origin_price | thousand}} 元</del>
                             </div>
-                            <div class="h5" v-if="detailProduct.price">特價 ${{ detailProduct.price | thousand}} 元</div>
+                            <div class="h5 product-off" v-if="detailProduct.price">特價 ${{ detailProduct.price | thousand}} 元</div>
                         </div>
                         <select v-model="detailProduct.num" class="form-control mt-3" name>
                             <option value="0" disabled selected>
@@ -229,7 +229,7 @@
                         </select>
                     </div>
                     <div class="modal-footer card-footer">
-                        <div class="text-muted mr-3" v-if="detailProduct.num">小計<strong>
+                        <div class="mr-3 product-off h5" v-if="detailProduct.num">總計<strong class="product-off">
                                 ${{ detailProduct.price * detailProduct.num | thousand}} 元</strong></div>
                         <button type="button" class="btn" @click="detailAddToCart(detailProduct,detailProduct.num)"
                             v-if="detailProduct.num">加到購物車</button>
