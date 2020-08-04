@@ -66,6 +66,7 @@ new Vue({
             axios.get(productUrl)
                 .then(res => {
                     this.detailProduct = res.data.data;
+                    console.log(this.detailProduct);
                     this.$set(this.detailProduct, 'num', 0);
                     $('#detailModal').modal('show');
                     this.isLoading = false;
@@ -95,6 +96,24 @@ new Vue({
             const cart = {
                 product: item.id,
                 quantity: 1
+            };
+            axios.post(addCartUrl, cart)
+                .then(res => {
+                    $('#detailModal').modal('hide');
+                    this.getCart();
+                    this.isLoading = false;
+                }).catch(err => {
+                    this.isLoading = false;
+                    $('#cartModal').modal('show');
+                });
+        },
+        detailAddToCart(item, quantity) {
+            // api/{uuid}/ec/shopping
+            const addCartUrl = `${this.api.path}api/${this.api.uuid}/ec/shopping`;
+            this.isLoading = true;
+            const cart = {
+                product: item.id,
+                quantity: quantity
             };
             axios.post(addCartUrl, cart)
                 .then(res => {
