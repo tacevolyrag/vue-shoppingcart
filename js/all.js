@@ -19,7 +19,8 @@ VeeValidate.configure({
 });
 // 匯入語系檔案
 import zh_TW from './zh_TW.js';
-console.log(VueLoading);
+
+
 // 加入至 VeeValidate 的設定檔案
 VeeValidate.localize('tw', zh_TW);
 
@@ -97,9 +98,9 @@ new Vue({
             };
             axios.post(addCartUrl, cart)
                 .then(res => {
-                    console.log(cart.product);
                     $('#detailModal').modal('hide');
                     this.getCart();
+                    this.isLoading = false;
                 }).catch(err => {
                     this.isLoading = false;
                     $('#cartModal').modal('show');
@@ -115,6 +116,7 @@ new Vue({
                     this.cart.forEach(item => {
                         this.cart.splice(id, 1);
                         this.getCart();
+                        this.isLoading = false;
                     });
                 });
         },
@@ -133,7 +135,6 @@ new Vue({
         updateTotalPrice() {
             this.cartTotal = 0;
             this.cart.forEach(item => {
-                this.toCurrency(this.cartTotal);
                 this.cartTotal += item.quantity * item.product.price;
             });
         },
