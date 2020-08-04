@@ -1,0 +1,115 @@
+body{
+    font-family: 微軟正黑體;
+    font-weight: bolder;
+}
+.navigation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;  
+}
+.navigation ul li a{
+    padding: 15px 50px;
+    color: #2a1a07;
+    font-size: 18px;
+}
+.navigation ul li a:hover{
+    background: #2a1a07;
+    color: #fff;
+}
+.navigation a{
+    text-decoration: none;
+    font-weight: bolder;
+}
+.navigation .reg{
+    display: flex;
+}
+.navigation .reg a{
+    text-decoration: none;
+    color: #4f4539;
+    padding: 0px 15px;
+    font-size: 15px;
+}
+.navigation .reg a:hover{
+    background: #4f4539;
+    color: #fff;
+}
+
+/* header-nav end */
+
+/* content product start */
+
+.products{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.product-title a{
+    color: #2a1a07;
+    text-decoration: none;
+    font-weight: bolder;
+}
+.products-list{
+    margin-bottom: 25px;
+}
+
+.product-origin{
+    position: relative;
+    color: #000;
+    font-weight: bolder;
+}
+.product-origin::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 55%;
+    border-bottom: 2px solid #f00;
+}
+.product-off{
+    color: #2a1a07;
+    font-weight: bolder;
+}
+
+
+.card-footer button,  .verification-submit button{
+    background-color: #2a1a07;
+    color: #fff;
+    transition: .3s;
+}
+.card-footer button:hover, .verification-submit button:hover{
+    background-color: #2a1a07;
+    color: #fff;
+}
+.card-footer .product-detail{
+    background-color: #fff;
+    color: #2a1a07;
+    border-color: #2a1a07;
+    transition: .3s;
+}
+.card-footer .product-detail:hover{
+    color: #FFF;
+}
+
+
+/* content product end */
+
+/* cart start */
+.cart table thead{
+    font-size: 20px;
+}
+.total-price{
+    color: #2a1a07;
+    font-weight: bolder;
+    font-size: 18px;
+}
+.join-cart button{
+    background-color: #2a1a07;
+    color: #fff;
+    transition: .3s;
+}
+.join-cart button:hover{
+    background-color: #2a1a07;
+    color: #fff;
+}
+/* cart end */
