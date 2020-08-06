@@ -134,7 +134,7 @@
         </div>
         <!-- 購物車 end -->
 
-        <!-- 收件人資訊驗證及訊息 start-->
+        <!-- 訂單資訊驗證及訊息 start-->
         <div class="my-5 row justify-content-center">
             <validation-observer v-slot="{ invalid }" class="col-md-8">
                 <form @submit.prevent="submitData">
@@ -215,7 +215,7 @@
                             <span class="h5">{{ detailProduct.description }}</span>
                         </blockquote>
                         <div class="d-flex justify-content-around mt-5 product-price">
-                            <div class="h5 product-origin" v-if="detailProduct.price"><del>原價 ${{ detailProduct.origin_price | thousand}} 元</del>
+                            <div class="h6 product-origin" v-if="detailProduct.price">原價 ${{ detailProduct.origin_price | thousand}} 元
                             </div>
                             <div class="h5 product-off" v-if="detailProduct.price">特價 ${{ detailProduct.price | thousand}} 元</div>
                         </div>
@@ -261,6 +261,28 @@
             </div>
         </div>
         <!-- Cart Modal  end-->
+
+        <!-- 訂單送出成功 Modal -->
+        <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">完成訂單</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        關閉
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h5>恭喜你已完成訂單囉!</h5>
+                </div>
+                <div class="modal-footer join-cart">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">選購其他商品!</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

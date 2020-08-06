@@ -33,10 +33,10 @@ new Vue({
         cartTotal: 0,
         isLoading: false,
         form: {
+            name: '',
             email: '',
             tel: '',
             address: '',
-            name: '',
             payment: '',
             message: '',
         },
@@ -172,9 +172,17 @@ new Vue({
                     console.log(err);
                 })
         },
-
+        // 購物車訂單送出
         submitData() {
-            alert('送出成功');
+            // api/{uuid}/ec/orders
+            this.isLoadind = true;
+            const submitUrl = `${this.api.path}api/${this.api.uuid}/ec/orders`;            
+            axios.post(submitUrl, this.form)
+                .then(res => {
+                    $('#submitModal').modal('show')
+                    this.getCart();
+                    this.isLoadind = false;
+                });
         },
     },
     created() {
